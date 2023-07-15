@@ -1,0 +1,19 @@
+server:
+  port: 8765
+
+spring:
+  application:
+    name:api-gateway
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      routes:
+        - id: currency-exchange
+          uri: http://localhost:8000/
+          predicates:
+              - Path=/currency-exchange/**
+        - id: currency-conversion
+          uri: http://localhost:8100/
+          predicates:
+            - Path=/currency-conversion/**, /currency-conversion-feign/**
